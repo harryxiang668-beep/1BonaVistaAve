@@ -78,8 +78,7 @@
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease), transform .8s var(--ease);}
   .reveal.active{opacity:1;transform:translateY(0);}
 
-  /* ---------- Hero ---------- */
-  /* ---------- Hero ---------- */
+  /* ---------- Hero (已修复背景图加载) ---------- */
   header#hero{
     height:100svh;
     min-height:520px;
@@ -90,22 +89,43 @@
     text-align:center;
     color:#fff;
     overflow:hidden;
+    background-color: var(--ink); /* 兜底深色背景 */
   }
 
-  /* 优化后的标语：高级渐变金 + 书写/打字机动画 */
+  /* 核心修复：添加首屏背景图及暗色遮罩 */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    /* ⚠️ 请确保 mainpool.jpg 和你的 HTML 文件在同一个文件夹下 */
+    background: url('mainpool.jpg') no-repeat center center/cover; 
+    z-index: 1;
+  }
+
+  /* 添加高级暗色半透明滤镜，衬托金色打字机文字 */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(22,35,44,0.45), rgba(22,35,44,0.65));
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* 标语：高级渐变金 + 书写/打字机动画 */
   .hero-tagline {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 500;
     font-size: clamp(1.2rem, 1.8vw + 0.6rem, 1.8rem);
-    /* 换成更亮眼的渐变金 */
     background: linear-gradient(135deg, #FFE8B6 0%, #C9A876 50%, #A8834A 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 0.05em;
     margin-bottom: 18px;
     
-    /* 核心书写动画设置 */
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
@@ -116,19 +136,16 @@
       blink 0.75s step-end infinite;
   }
 
-  /* 打字动画：控制宽度从0到100% */
   @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
   }
 
-  /* 光标闪烁动画（书写完成后光标自动消失） */
   @keyframes blink {
     from, to { border-color: transparent; }
     50% { border-color: #FFE8B6; }
   }
 
-  /* 调整大标题和地名的出现延迟，配合书写动画 */
   .hero-content h1{
     color:#fff;
     font-weight:300;
@@ -136,7 +153,7 @@
     letter-spacing:0.05em;
     margin-bottom:14px;
     opacity:0;
-    animation:heroRise 1s var(--ease) 2.5s both; /* 延迟到书写快结束时触发 */
+    animation:heroRise 1s var(--ease) 2.5s both; 
   }
 
   .hero-location{
@@ -361,7 +378,7 @@
     border:1.5px solid var(--ink);
   }
   .floor-ground{aspect-ratio:20/22.4;}
-  .floor-stage.floor-first{aspect-ratio:11.4/21;} /* 👈 已优化：避免了按钮变大的问题 */
+  .floor-stage.floor-first{aspect-ratio:11.4/21;}
 
   .room-hot{
     position:absolute;
@@ -801,7 +818,6 @@ function updateDetail(key){
       const panel = room.closest('.floor-panel');
       panel.querySelectorAll('.room-hot').forEach(r=>r.classList.remove('active'));
       
-      // 联动高亮一楼和二楼所有 data-room 相同的块
       document.querySelectorAll('.room-hot[data-room="'+room.dataset.room+'"]').forEach(r=>r.classList.add('active'));
       updateDetail(room.dataset.room);
     };
@@ -826,7 +842,6 @@ function updateDetail(key){
       Object.values(floorPanels).forEach(p=>p.classList.remove('active'));
       floorPanels[floor].classList.add('active');
       
-      // 切换楼层时重置对应楼层的高亮和右侧信息
       const activePanel = floorPanels[floor];
       activePanel.querySelectorAll('.room-hot').forEach(r=>r.classList.remove('active'));
       const defRoomEl = activePanel.querySelector(`.room-hot[data-room="${defaultRoom[floor]}"]`);
