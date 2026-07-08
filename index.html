@@ -376,7 +376,7 @@
     border:1.5px solid var(--ink);
   }
   .floor-ground{aspect-ratio:20/22.4;}
-  .floor-stage.floor-first{aspect-ratio:11.4/21;}
+  .floor-stage.floor-first{aspect-ratio:11.4/21;} /* 👈 已优化：避免了按钮变大的问题 */
 
   .room-hot{
     position:absolute;
@@ -578,7 +578,7 @@
     </div>
     <div class="gallery-container">
       <div class="slide active" style="background-image:url('outview.jpg');">
-        <div class="slide-caption">Grand Classic Exterior &amp; Landscaping</div>
+        <div class="slide-caption">Grand Classic Exterior & Landscaping</div>
       </div>
       <div class="slide" style="background-image:url('livingroom.jpg');">
         <div class="slide-caption">Sun-Drenched Living Pavilion</div>
@@ -628,13 +628,12 @@
           <text x="30" y="9" text-anchor="middle" font-size="7" fill="#16232C" font-family="Inter, sans-serif">N</text>
         </svg>
 
-        <!-- GROUND FLOOR -->
         <div class="floor-panel active" id="panel-ground">
           <div class="floor-stage floor-ground">
             <div class="room-hot" data-room="undercover" style="left:35%;top:0%;width:65%;height:13.39%;">Alfresco</div>
             <div class="room-hot" data-room="undercover" style="left:0%;top:0%;width:35%;height:64.29%;">Alfresco</div>
             <div class="room-hot" data-room="kitchen" style="left:35%;top:13.39%;width:15%;height:26.79%;">Kitchen</div>
-            <div class="room-hot" data-room="livingDining" style="left:50%;top:13.39%;width:50%;height:26.79%;">Dining &amp; Living</div>
+            <div class="room-hot" data-room="livingDining" style="left:50%;top:13.39%;width:50%;height:26.79%;">Dining & Living</div>
             <div class="room-hot" data-room="utility" style="left:35%;top:40.18%;width:10%;height:31.25%;">Laundry</div>
             <div class="room-hot" data-room="formalLiving" style="left:45%;top:40.18%;width:35%;height:31.25%;">Formal Living</div>
             <div class="room-hot" data-room="garage" style="left:0%;top:64.29%;width:35%;height:26.79%;">Garage</div>
@@ -645,7 +644,6 @@
           </div>
         </div>
 
-        <!-- FIRST FLOOR -->
         <div class="floor-panel" id="panel-first">
           <div class="floor-stage floor-first">
             <div class="room-hot" data-room="balcony" style="left:0%;top:0%;width:100%;height:7.14%;">Balcony</div>
@@ -656,7 +654,7 @@
             <div class="room-hot" data-room="bedroom4" style="left:52.63%;top:42.38%;width:47.37%;height:18.10%;">Bedroom 4</div>
             <div class="room-hot" data-room="ensuite" style="left:0%;top:50%;width:52.63%;height:16.67%;">Ensuite</div>
             <div class="room-hot quiet" data-room="ensuite" style="left:52.63%;top:60.48%;width:47.37%;height:6.19%;">BIR</div>
-            <div class="room-hot active" data-room="mainBedroom" style="left:0%;top:66.67%;width:100%;height:23.81%;">Main Bedroom</div>
+            <div class="room-hot" data-room="mainBedroom" style="left:0%;top:66.67%;width:100%;height:23.81%;">Main Bedroom</div>
             <div class="room-hot" data-room="balcony" style="left:0%;top:90.48%;width:100%;height:9.52%;">Balcony</div>
           </div>
         </div>
@@ -763,62 +761,61 @@
 
   /* ---------- Floor plan room data ---------- */
   const roomData = {
-    undercover:{title:"Undercover Alfresco",dim:"",desc:"Covered outdoor areas frame the side and rear of the home, extending everyday living outdoors and sheltering entertaining in any weather."},
-    kitchen:{title:"Kitchen",dim:"",desc:"Fitted with a walk-in pantry, dishwasher and quality appliances, the kitchen anchors the rear of the home and serves the casual living zone and alfresco with equal ease."img:"img/kitchen2.jpg"},
-    livingDining:{title:"Dining &amp; Living",dim:"8.6 × 6.0 M",desc:"The heart of the home — a vast open-plan dining and living zone bathed in north-facing light, flowing directly onto the undercover alfresco beyond.", img:"img/livingroom2.jpg"},
-    utility:{title:"Laundry &amp; Bathroom",dim:"",desc:"A full-sized laundry with external access sits beside a family bathroom and understair storage, positioned centrally for everyday convenience."},
-    formalLiving:{title:"Formal Living",dim:"5.4 × 7.0 M",desc:"An expansive formal lounge anchored by an open fireplace — a more intimate space for entertaining, separate from the everyday living wing." img:"img/smalllivingroom.jpg"},
-    garage:{title:"Double Garage",dim:"6.6 × 6.0 M",desc:"A remote-controlled double garage with internal home access, plus generous depth for storage, a workbench, or bikes and boards."},
-    entry:{title:"Entry &amp; Porch",dim:"",desc:"A wide covered porch and welcoming entry foyer set the tone from the street, sheltering the approach and framing the first impression of the home."},
-    bedroom5:{title:"Bedroom Five",dim:"3.4 × 4.4 M",desc:"A versatile ground-floor bedroom with built-in robe, ideal as a guest room or space for extended family, positioned quietly beside the study."},
-    study:{title:"Study",dim:"3.6 × 4.4 M",desc:"A fully enclosed home office at the front of the house, away from the living zones — genuinely quiet space for remote work or a home-based practice."},
-    balcony:{title:"Balcony",dim:"",desc:"Front and rear balconies capture elevated, leafy outlooks over Bona Vista Avenue — an easy spot for a morning coffee or a quiet evening outlook."},
-    rumpus:{title:"Rumpus",dim:"6.0 × 5.0 M",desc:"A dedicated second living zone upstairs — ideal as a kids' retreat, media room or teenage hangout, set apart from the bedroom wing."},
-    bedroom2:{title:"Bedroom Two",dim:"5.4 × 3.6 M",desc:"A generously proportioned bedroom with built-in robe, sharing easy access to the family bathroom across the landing."},
-    bedroom3:{title:"Bedroom Three",dim:"5.4 × 3.8 M",desc:"A bright, well-proportioned bedroom with built-in robe, positioned along the rear of the upper level."},
-    bathUpper:{title:"Family Bathroom",dim:"",desc:"A full family bathroom beside the staircase landing, conveniently placed to serve all three upstairs bedrooms and the rumpus room."},
-    bedroom4:{title:"Bedroom Four",dim:"5.4 × 3.8 M",desc:"The fourth upstairs bedroom, with matching built-in storage — equally suited to children, teenagers or a home office."},
-    ensuite:{title:"Ensuite",dim:"",desc:"A private ensuite with its own walk-in robe, positioned directly off the main bedroom for complete privacy."},
-    mainBedroom:{title:"Main Bedroom",dim:"10.0 × 5.0 M",desc:"An extraordinary main suite spanning almost the full width of the home — a genuine private retreat with room for a sitting area, opening onto its own balcony."}
+    undercover:{title:"Undercover Alfresco",dim:"",desc:"Covered outdoor areas frame the side and rear of the home, extending everyday living outdoors and sheltering entertaining in any weather.", img:"img/alfresco.jpg"},
+    kitchen:{title:"Kitchen",dim:"",desc:"Fitted with a walk-in pantry, dishwasher and quality appliances, the kitchen anchors the rear of the home and serves the casual living zone and alfresco with equal ease.", img:"img/kitchen2.jpg"},
+    livingDining:{title:"Dining & Living",dim:"8.6 × 6.0 M",desc:"The heart of the home — a vast open-plan dining and living zone bathed in north-facing light, flowing directly onto the undercover alfresco beyond.", img:"img/livingroom2.jpg"},
+    utility:{title:"Laundry & Bathroom",dim:"",desc:"A full-sized laundry with external access sits beside a family bathroom and understair storage, positioned centrally for everyday convenience.", img:"img/laundry.jpg"},
+    formalLiving:{title:"Formal Living",dim:"5.4 × 7.0 M",desc:"An expansive formal lounge anchored by an open fireplace — a more intimate space for entertaining, separate from the everyday living wing.", img:"img/smalllivingroom.jpg"},
+    garage:{title:"Double Garage",dim:"6.6 × 6.0 M",desc:"A remote-controlled double garage with internal home access, plus generous depth for storage, a workbench, or bikes and boards.", img:"img/garage.jpg"},
+    entry:{title:"Entry & Porch",dim:"",desc:"A wide covered porch and welcoming entry foyer set the tone from the street, sheltering the approach and framing the first impression of the home.", img:"img/entry.jpg"},
+    bedroom5:{title:"Bedroom Five",dim:"3.4 × 4.4 M",desc:"A versatile ground-floor bedroom with built-in robe, ideal as a guest room or space for extended family, positioned quietly beside the study.", img:"img/bedroom5.jpg"},
+    study:{title:"Study",dim:"3.6 × 4.4 M",desc:"A fully enclosed home office at the front of the house, away from the living zones — genuinely quiet space for remote work or a home-based practice.", img:"img/study.jpg"},
+    balcony:{title:"Balcony",dim:"",desc:"Front and rear balconies capture elevated, leafy outlooks over Bona Vista Avenue — an easy spot for a morning coffee or a quiet evening outlook.", img:"img/balcony.jpg"},
+    rumpus:{title:"Rumpus",dim:"6.0 × 5.0 M",desc:"A dedicated second living zone upstairs — ideal as a kids' retreat, media room or teenage hangout, set apart from the bedroom wing.", img:"img/rumpus.jpg"},
+    bedroom2:{title:"Bedroom Two",dim:"5.4 × 3.6 M",desc:"A generously proportioned bedroom with built-in robe, sharing easy access to the family bathroom across the landing.", img:"img/bedroom2.jpg"},
+    bedroom3:{title:"Bedroom Three",dim:"5.4 × 3.8 M",desc:"A bright, well-proportioned bedroom with built-in robe, positioned along the rear of the upper level.", img:"img/bedroom3.jpg"},
+    bathUpper:{title:"Family Bathroom",dim:"",desc:"A full family bathroom beside the staircase landing, conveniently placed to serve all three upstairs bedrooms and the rumpus room.", img:"img/bathroom.jpg"},
+    bedroom4:{title:"Bedroom Four",dim:"5.4 × 3.8 M",desc:"The fourth upstairs bedroom, with matching built-in storage — equally suited to children, teenagers or a home office.", img:"img/bedroom4.jpg"},
+    ensuite:{title:"Ensuite",dim:"",desc:"A private ensuite with its own walk-in robe, positioned directly off the main bedroom for complete privacy.", img:"img/ensuite.jpg"},
+    mainBedroom:{title:"Main Bedroom",dim:"10.0 × 5.0 M",desc:"An extraordinary main suite spanning almost the full width of the home — a genuine private retreat with room for a sitting area, opening onto its own balcony.", img:"img/main-bedroom.jpg"}
   };
 
 const roomTitle = document.getElementById('roomTitle');
 const roomDim = document.getElementById('roomDim');
 const roomDescription = document.getElementById('roomDescription');
-const roomImg = document.getElementById('roomImg'); // 👈 获取图片DOM
+const roomImg = document.getElementById('roomImg'); 
 
 function updateDetail(key){
   const data = roomData[key];
   if(!data) return;
   
-  // 隐藏旧内容（做淡出动画）
   roomTitle.style.opacity = 0;
   roomDim.style.opacity = 0;
   roomDescription.style.opacity = 0;
-  if(roomImg) roomImg.style.opacity = 0; // 👈 隐藏旧图片
+  if(roomImg) roomImg.style.opacity = 0; 
   
   setTimeout(()=>{
-    // 换上新内容
     roomTitle.innerHTML = data.title;
     roomDim.innerHTML = data.dim;
     roomDescription.innerHTML = data.desc;
-    if(roomImg && data.img) roomImg.src = data.img; // 👈 换上新图片路径
+    if(roomImg && data.img) roomImg.src = data.img; 
     
-    // 显示新内容（做淡入动画）
     roomTitle.style.opacity = 1;
     roomDim.style.opacity = 1;
     roomDescription.style.opacity = 1;
-    if(roomImg) roomImg.style.opacity = 1; // 👈 显示新图片
+    if(roomImg) roomImg.style.opacity = 1; 
   },220);
 }
 
   document.querySelectorAll('.room-hot').forEach(room=>{
     room.setAttribute('tabindex','0');
     room.setAttribute('role','button');
-    const activate = ()=>{
+    const activate = () => {
       const panel = room.closest('.floor-panel');
       panel.querySelectorAll('.room-hot').forEach(r=>r.classList.remove('active'));
-      panel.querySelectorAll('.room-hot[data-room="'+room.dataset.room+'"]').forEach(r=>r.classList.add('active'));
+      
+      // 联动高亮一楼和二楼所有 data-room 相同的块
+      document.querySelectorAll('.room-hot[data-room="'+room.dataset.room+'"]').forEach(r=>r.classList.add('active'));
       updateDetail(room.dataset.room);
     };
     room.addEventListener('click', activate);
@@ -841,6 +838,13 @@ function updateDetail(key){
       floorToggle.classList.toggle('floor-first', floor === 'first');
       Object.values(floorPanels).forEach(p=>p.classList.remove('active'));
       floorPanels[floor].classList.add('active');
+      
+      // 切换楼层时重置对应楼层的高亮和右侧信息
+      const activePanel = floorPanels[floor];
+      activePanel.querySelectorAll('.room-hot').forEach(r=>r.classList.remove('active'));
+      const defRoomEl = activePanel.querySelector(`.room-hot[data-room="${defaultRoom[floor]}"]`);
+      if(defRoomEl) defRoomEl.classList.add('active');
+      
       updateDetail(defaultRoom[floor]);
     });
   });
