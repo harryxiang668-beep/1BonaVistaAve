@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Bona Vista Avenue | Surrey Hills Luxury Residence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #1A252C; /* Deep Slate Blue */
+            --secondary: #D4AF37; /* Subtle Luxury Gold */
+            --bg-light: #F9F9FA;
+            --text-dark: #2C3E50;
+            --text-muted: #7F8C8D;
+            --transition-smooth: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            color: var(--primary);
+        }
+
+        /* --- Smooth Reveal Animation Classes --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-smooth);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Hero Section --- */
+        header {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            background: linear-gradient(rgba(26, 37, 44, 0.4), rgba(26, 37, 44, 0.7)), 
+                        url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+        }
+
+        .hero-content h1 {
+            color: #ffffff;
+            font-size: 4rem;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            animation: fadeInUp 1.5s ease;
+        }
+
+        /* --- Section Styling --- */
+        section {
+            padding: 100px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 1px;
+            background: var(--secondary);
+            margin: 20px auto 0;
+        }
+
+        /* --- Album Gallery Section --- */
+        .gallery-container {
+            position: relative;
+            height: 600px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(1.05);
+            transition: opacity 1s ease, transform 1.2s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            color: #fff;
+            background: rgba(26, 37, 44, 0.8);
+            padding: 15px 25px;
+            backdrop-filter: blur(5px);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* --- Interactive Floor Plan Section --- */
+        .floorplan-wrapper {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .floorplan-svg-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        /* Simplified Interactive Layout using CSS Grid/Shapes imitating a Blueprint */
+        .blueprint {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 150px);
+            gap: 10px;
+            background: #EAECEE;
+            padding: 10px;
+            border: 2px solid var(--primary);
+        }
+
+        .room {
+            background: #ffffff;
+            border: 1px dashed #BDC3C7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            user-select: none;
+        }
+
+        .room:hover, .room.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* Custom room layout shapes */
+        .room-master { grid-column: 1 / 3; }
+        .room-living { grid-column: 2 / 4; grid-row: 2; }
+
+        .room-details-box {
+            background: #ffffff;
+            padding: 40px;
+            border-left: 3px solid var(--secondary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .room-details-box h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            transition: var(--transition-smooth);
+        }
+
+        .room-details-box p {
+            color: var(--text-muted);
+            transition: var(--transition-smooth);
+        }
+
+        /* --- Map & Location Section --- */
+        .map-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
+            filter: grayscale(0.3) contrast(1.1);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 900px) {
+            .floorplan-wrapper { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+            section { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hero-content">
+            <h1>1 BONA VISTA AVENUE</h1>
+            <p>Surrey Hills, Victoria</p>
+        </div>
+    </header>
+
+    <section id="gallery" class="reveal">
+        <h2 class="section-title">The Residence Gallery</h2>
+        <div class="gallery-container">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-caption">Grand Modern Exterior & Landscaping</div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-caption">Sun-Drenched Living Pavilion</div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-caption">State-of-the-Art Chef's Kitchen</div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-caption">North-Facing Outdoor Entertaining</div>
+            </div>
+
+            <div class="gallery-nav">
+                <button class="nav-btn" id="prevBtn">❮</button>
+                <button class="nav-btn" id="nextBtn">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="floorplan" class="reveal">
+        <h2 class="section-title">Interactive Architectural Flow</h2>
+        <div class="floorplan-wrapper">
+            
+            <div class="floorplan-svg-container">
+                <div class="blueprint">
+                    <div class="room room-master active" data-room="master">Master Retreat</div>
+                    <div class="room" data-room="study">Study</div>
+                    <div class="room" data-room="kitchen">Kitchen</div>
+                    <div class="room room-living" data-room="living">Living Area</div>
+                </div>
+            </div>
+
+            <div class="room-details-box">
+                <h3 id="roomTitle">Master Retreat</h3>
+                <p id="roomDescription">An exceptionally large master suite designed to serve as a private oasis. Features extensive walk-in wardrobes, a lavish full-sized ensuite bathroom, and large windows catching the optimal morning light.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="location" class="reveal">
+        <h2 class="section-title">Prestigious Location</h2>
+        <div class="map-wrapper">
+            <iframe class="map-iframe" src="https://maps.google.com/maps?q=1%20Bona%20Vista%20Avenue,%20Surrey%20Hills%20VIC%203127&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <script>
+        // --- 1. Smooth On-Scroll Reveal Animation ---
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const triggerBottom = window.innerHeight * 0.85;
+            revealElements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                if (elTop < triggerBottom) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll); // Trigger on initial load
+
+        // --- 2. Album Photo Switcher Logic ---
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+
+        const showSlide = (index) => {
+            slides.forEach(slide => slide.classList.remove('active'));
+            if (index >= slides.length) currentSlide = 0;
+            if (index < 0) currentSlide = slides.length - 1;
+            slides[currentSlide].classList.add('active');
+        };
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide++;
+            showSlide(currentSlide);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide--;
+            showSlide(currentSlide);
+        });
+
+        // --- 3. Interactive Floor Plan Data & Event Handlers ---
+        const roomData = {
+            master: {
+                title: "Master Retreat",
+                desc: "An exceptionally large master suite designed to serve as a private oasis. Features extensive walk-in wardrobes, a lavish full-sized ensuite bathroom, and large windows catching the optimal morning light."
+            },
+            study: {
+                title: "Executive Home Office / Study",
+                desc: "Strategically isolated near the front entrance to ensure absolute silence and focus. Perfect for working from home or managing remote corporate affairs seamlessly."
+            },
+            kitchen: {
+                title: "Epicurean Chef's Kitchen",
+                desc: "Equipped with premium structural framing, expansive stone island benchtops, and luxury European appliances. Strategically connected directly to both indoor formal dining and outdoor spaces."
+            },
+            living: {
+                title: "Sun-Drenched Living Area",
+                desc: "The true crown jewel of the home. Features wide spatial dimensions configured toward the coveted north-facing rear layout, capturing brilliant daylight throughout the afternoon."
+            }
+        };
+
+        const rooms = document.querySelectorAll('.room');
+        const roomTitle = document.getElementById('roomTitle');
+        const roomDescription = document.getElementById('roomDescription');
+
+        rooms.forEach(room => {
+            room.addEventListener('click', () => {
+                // Toggle active state styling
+                rooms.forEach(r => r.classList.remove('active'));
+                room.classList.add('active');
+
+                // Smooth fade text switch effect
+                roomTitle.style.opacity = 0;
+                roomDescription.style.opacity = 0;
+
+                setTimeout(() => {
+                    const selectedRoom = room.getAttribute('data-room');
+                    roomTitle.textContent = roomData[selectedRoom].title;
+                    roomDescription.textContent = roomData[selectedRoom].desc;
+                    
+                    roomTitle.style.opacity = 1;
+                    roomDescription.style.opacity = 1;
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
